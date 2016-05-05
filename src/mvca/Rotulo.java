@@ -9,13 +9,12 @@ package mvca;
  *
  * @author humbe
  */
-public class MVCAAlgorithm {
+class Rotulo {
 
-    Grafo arvoreGeradoraDeRotulosMinimos;
+    private String l = null;
 
-    MVCAAlgorithm(GrafoListaAdjacencia g) {
-        this.arvoreGeradoraDeRotulosMinimos = new GrafoListaAdjacencia(g.getVertices());
-        for
+    Rotulo(String l) {
+        this.l = new String(l);
     }
 
 }

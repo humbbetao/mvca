@@ -8,10 +8,18 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class GrafoListaAdjacencia implements
-        Grafo<Vertice, Aresta<Vertice, Vertice>> {
+public class GrafoListaAdjacencia implements Grafo<Vertice, Aresta<Vertice, Vertice>> {
 
     HashMap<Vertice, ArrayList<Vertice>> grafo = new HashMap<Vertice, ArrayList<Vertice>>();
+    int numeroDeRotulos = 0;
+    ArrayList<Rotulo> rotulos = new ArrayList<Rotulo>();
+
+    GrafoListaAdjacencia(Iterator<Vertice> vertices) {
+        while (vertices.hasNext()) {
+            adicionaVertice(vertices.next());
+        }
+
+    }
 
     @Override
     public Iterator<Vertice> getVerticesAdjacentes(Vertice u) {

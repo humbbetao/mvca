@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MVCA {
 
@@ -29,22 +30,29 @@ public class MVCA {
                     Vertice v = new Vertice(String.valueOf(j));
                     g.adicionaVertice(u);
                     g.adicionaVertice(v);
+                    Rotulo l = new Rotulo(s[j]);
+                    if (g.rotulos.isEmpty()) {
+                        g.rotulos = new ArrayList<>();
+                        g.rotulos.add(l);
+                        g.numeroDeRotulos++;
+                    }
+                    if (!g.rotulos.contains(l)) {
+                        g.rotulos.add(l);
+                        g.numeroDeRotulos++;
+                    }
                     if (!s[j].equals(numeroDeLabels)) {
-                        g.adicionaAresta(new Aresta(u, v));
+                        g.adicionaAresta(new Aresta(u, v, l));
                     }
                     numeroDeLinhas--;
                 }
             }
             if (numeroDeLinhas == 0) {
                 numeroDeLinhas = numeroDeVertices;
-                MVCAAlgorithm m = MVCAAlgorithm(g);
+                MVCAAlgorithm m = new MVCAAlgorithm(g);
             }
             System.out.println(linha);
             i++;
         }
     }
 
-    private static MVCAAlgorithm MVCAAlgorithm(GrafoListaAdjacencia g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
