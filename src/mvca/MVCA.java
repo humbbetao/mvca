@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mvca;
 
 import java.io.BufferedReader;
@@ -10,18 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- *
- * @author humbe
- */
 public class MVCA {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
-        Grafo g = new GrafoListaAdjacencia();
+        GrafoListaAdjacencia g = new GrafoListaAdjacencia();
         FileReader arq = new FileReader("HDGraph50_12.txt");
         BufferedReader lerArq = new BufferedReader(arq);
         String linha;
@@ -47,9 +35,16 @@ public class MVCA {
                     numeroDeLinhas--;
                 }
             }
+            if (numeroDeLinhas == 0) {
+                numeroDeLinhas = numeroDeVertices;
+                MVCAAlgorithm m = MVCAAlgorithm(g);
+            }
             System.out.println(linha);
+            i++;
         }
-
     }
 
+    private static MVCAAlgorithm MVCAAlgorithm(GrafoListaAdjacencia g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
