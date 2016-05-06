@@ -6,30 +6,6 @@ public class Aresta<U extends Vertice, V extends Vertice> {
     private V v2 = null;
     private Rotulo l = null;
 
-    public U getV1() {
-        return v1;
-    }
-
-    public void setV1(U v1) {
-        this.v1 = v1;
-    }
-
-    public V getV2() {
-        return v2;
-    }
-
-    public void setV2(V v2) {
-        this.v2 = v2;
-    }
-
-    public Rotulo getL() {
-        return l;
-    }
-
-    public void setL(Rotulo l) {
-        this.l = l;
-    }
-
     public Aresta(U v1, V v2, Rotulo l) {
         this.v1 = v1;
         this.v2 = v2;
@@ -56,5 +32,11 @@ public class Aresta<U extends Vertice, V extends Vertice> {
     public void setVertice2(V v2) {
         this.v2 = v2;
     }
+    public Rotulo getL() {
+        return l;
+    }
 
+    public void setL(Rotulo l) {
+        this.l = l;
+    }
 }

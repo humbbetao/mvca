@@ -1,7 +1,7 @@
 package mvca;
 
 public class Vertice {
-	private String id;
+	String id;
 
 	public Vertice(){
 		this.id = String.valueOf(getClass().hashCode());

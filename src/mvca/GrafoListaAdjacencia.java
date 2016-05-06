@@ -21,6 +21,9 @@ public class GrafoListaAdjacencia implements Grafo<Vertice, Aresta<Vertice, Vert
 
     }
 
+    GrafoListaAdjacencia() {
+    }
+
     @Override
     public Iterator<Vertice> getVerticesAdjacentes(Vertice u) {
         if (u != null && grafo.containsKey(u)) {

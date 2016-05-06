@@ -17,4 +17,12 @@ class Rotulo {
         this.l = new String(l);
     }
 
+    public String getL() {
+        return l;
+    }
+
+    public void setL(String l) {
+        this.l = l;
+    }
+
 }

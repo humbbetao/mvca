@@ -48,7 +48,7 @@ public class MVCA {
             }
             if (numeroDeLinhas == 0) {
                 numeroDeLinhas = numeroDeVertices;
-                MVCAAlgorithm m = new MVCAAlgorithm(g);
+                MVCAAlgorithm m = new MVCAAlgorithm(g, numeroDeVertices);
             }
             System.out.println(linha);
             i++;
