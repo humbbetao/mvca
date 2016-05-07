@@ -6,10 +6,10 @@ package mvca;
  */
 public class BuscaProfundidade implements Algoritmo {
 
-    private Grafo<VerticeBuscaProfundidade, Aresta<VerticeBuscaProfundidade, VerticeBuscaProfundidade>> g;
+    private GrafoListaAdjacencia g;
     private VerticeBuscaProfundidade s;
 
-    public BuscaProfundidade(Grafo<VerticeBuscaProfundidade, Aresta<VerticeBuscaProfundidade, VerticeBuscaProfundidade>> g, VerticeBuscaProfundidade verticeInicial) {
+    public BuscaProfundidade(GrafoListaAdjacencia g, VerticeBuscaProfundidade verticeInicial) {
         if (g.getVertice(verticeInicial.getId()) == null) {
             throw new RuntimeException("O vértice de índice " + verticeInicial.getId() + " não pertence ao grafo " + g.toString() + ". "
                     + "Utilize um vértice válido como argumento do construtor da classe " + this.getClass().getName());
@@ -26,7 +26,7 @@ public class BuscaProfundidade implements Algoritmo {
         int r = 0;
         VerticeBuscaProfundidade u = new VerticeBuscaProfundidade();
         while (g.getVertices().hasNext()) {
-            u = g.getVertices().next();
+            u = (VerticeBuscaProfundidade) g.getVertices().next();
             u.setCor(new CorVertice(Cor.Branco));
             u.setPai(null);
 
@@ -36,9 +36,9 @@ public class BuscaProfundidade implements Algoritmo {
             if (recomecou == true && r > 0) {
                 return true;
             }
-            if (g.getVertices().next().getCor().getCor() == Cor.Branco) {
+            if (g.getVertices().next().getCor() == Cor.Branco) {
                 r = 1;
-                u = g.getVertices().next();
+                u = (VerticeBuscaProfundidade) g.getVertices().next();
                 executar(u, tempo);
             }
 
@@ -52,7 +52,7 @@ public class BuscaProfundidade implements Algoritmo {
         u.setTempoDescoberta(tempo);
         u.setCor(new CorVertice(Cor.Cinza));
         while (g.getVerticesAdjacentes(u).hasNext()) {
-            VerticeBuscaProfundidade v = g.getVerticesAdjacentes(u).next();
+            VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) g.getVerticesAdjacentes(u).next();
             if (v.getCor().getCor() == Cor.Branco) {
                 v.setPai(u);
                 executar(u, tempo);

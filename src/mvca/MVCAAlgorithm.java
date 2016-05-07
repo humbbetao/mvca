@@ -50,12 +50,12 @@ public class MVCAAlgorithm {
 
     }
 
-    private int contarNumeroDeLabels(int numeroDeVertices) {
+    public int contarNumeroDeLabels(int numeroDeVertices) {
 
         for (int i = 0; i < numeroDeVertices; i++) {
             quantoVerticesTem.put(String.valueOf(i), 0);
         }
-        BuscaProfundidade buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
+        BuscaProfundidade buscaEmProfundidade = new BuscaProfundidade((GrafoListaAdjacencia) arvoreGeradoraDeRotulosMinimos, verticeInicial);
         while (buscaEmProfundidade.inicializaGrafo() != false) {// enquanto nãoe stiver conectado
             while (g.getArestas().hasNext()) {
                 int numeroDeRepeticoesDeUmLabel = quantoVerticesTem.get(g.getArestas().next().getL().getL());

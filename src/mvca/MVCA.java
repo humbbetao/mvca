@@ -18,13 +18,16 @@ public class MVCA {
         int numeroDeVertices = 0;
         int numeroDeLinhas = 0;
         int numeroDeLabels = 0;
+        int k = 0;
         while ((linha = lerArq.readLine()) != null) {
             String[] s = linha.split(" ");
+
             if (i == 0) {
                 numeroDeVertices = Integer.parseInt(s[0]);
                 numeroDeLabels = Integer.parseInt(s[1]);
                 numeroDeLinhas = numeroDeVertices;
             } else {
+                numeroDeLinhas--;
                 for (int j = 0; j < s.length; j++) {
                     Vertice u = new Vertice(String.valueOf(numeroDeLinhas));
                     Vertice v = new Vertice(String.valueOf(j));
@@ -43,12 +46,16 @@ public class MVCA {
                     if (!s[j].equals(numeroDeLabels)) {
                         g.adicionaAresta(new Aresta(u, v, l));
                     }
-                    numeroDeLinhas--;
+
                 }
             }
             if (numeroDeLinhas == 0) {
+                k++;
                 numeroDeLinhas = numeroDeVertices;
                 MVCAAlgorithm m = new MVCAAlgorithm(g, numeroDeVertices);
+                System.out.println(m.contarNumeroDeLabels(numeroDeVertices) + "ESSE É O DO" + k);
+//                print()
+                numeroDeLinhas = numeroDeVertices;
             }
             System.out.println(linha);
             i++;
