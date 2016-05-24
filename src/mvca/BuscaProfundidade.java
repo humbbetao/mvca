@@ -1,5 +1,8 @@
 package mvca;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  *
  * @author humbe
@@ -25,20 +28,24 @@ public class BuscaProfundidade implements Algoritmo {
         boolean recomecou = false;
         int r = 0;
         VerticeBuscaProfundidade u = new VerticeBuscaProfundidade();
-        while (g.getVertices().hasNext()) {
-            u = (VerticeBuscaProfundidade) g.getVertices().next();
+        Iterator<Aresta<Vertice, Vertice>> arestas = g.getArestas();
+        while (arestas.hasNext()) {
+            Aresta a = arestas.next();
+            u = (VerticeBuscaProfundidade) a.getVertice1();
             u.setCor(new CorVertice(Cor.Branco));
             u.setPai(null);
 
         }
         tempo = 0;
-        while (g.getVertices().hasNext()) {
+        Iterator<VerticeBuscaProfundidade> vertices = (Iterator<VerticeBuscaProfundidade>) g.getVertices();
+        while (vertices.hasNext()) {
+            VerticeBuscaProfundidade vertice = vertices.next();
             if (recomecou == true && r > 0) {
                 return true;
             }
-            if (g.getVertices().next().getCor() == Cor.Branco) {
+            if (vertice.getCor().getCor() == Cor.Branco) {
                 r = 1;
-                u = (VerticeBuscaProfundidade) g.getVertices().next();
+                u = (VerticeBuscaProfundidade) vertice;
                 executar(u, tempo);
             }
 
@@ -51,8 +58,9 @@ public class BuscaProfundidade implements Algoritmo {
         tempo++;
         u.setTempoDescoberta(tempo);
         u.setCor(new CorVertice(Cor.Cinza));
-        while (g.getVerticesAdjacentes(u).hasNext()) {
-            VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) g.getVerticesAdjacentes(u).next();
+        Iterator<Vertice> verticesAdj = g.getVerticesAdjacentes(u);
+        while (verticesAdj.hasNext()) {
+            VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) verticesAdj.next();
             if (v.getCor().getCor() == Cor.Branco) {
                 v.setPai(u);
                 executar(u, tempo);

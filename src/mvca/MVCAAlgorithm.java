@@ -7,6 +7,7 @@ package mvca;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.HashMap;
  */
 public class MVCAAlgorithm {
 
-    Grafo arvoreGeradoraDeRotulosMinimos;
+    GrafoListaAdjacencia arvoreGeradoraDeRotulosMinimos;
     int numeroMaximo = 0;
     String label = null;
     VerticeBuscaProfundidade verticeInicial;
@@ -40,10 +41,11 @@ public class MVCAAlgorithm {
 //H.
 //5. End (for while).
 //6. Find an arbitrary spanning tree of H.
-    private void transferirArestas(GrafoListaAdjacencia g, String label, int numeroMaximo, Grafo arvoreGeradoraDeRotulosMinimos) {
-        while (g.getArestas().hasNext()) {
-            if (g.getArestas().next().getL().getL().equals(label)) {
-                Aresta arestaNova = new Aresta(this.arvoreGeradoraDeRotulosMinimos.getVertice(g.getArestas().next().getVertice1().getId()), this.arvoreGeradoraDeRotulosMinimos.getVertice(g.getArestas().next().getVertice1().getId()));
+    private void transferirArestas(GrafoListaAdjacencia g, String label, int numeroMaximo, GrafoListaAdjacencia arvoreGeradoraDeRotulosMinimos) {
+       Iterator<Aresta<Vertice, Vertice>> arestas = g.getArestas();
+        while (arestas.hasNext()) {
+            if (arestas.next().getL().getL().equals(label)) {
+                Aresta arestaNova = new Aresta(this.arvoreGeradoraDeRotulosMinimos.getVertice(arestas.next().getVertice1().getId()), this.arvoreGeradoraDeRotulosMinimos.getVertice(g.getArestas().next().getVertice1().getId()));
                 this.arvoreGeradoraDeRotulosMinimos.adicionaAresta(arestaNova);
             }
         }
@@ -57,25 +59,30 @@ public class MVCAAlgorithm {
         }
         BuscaProfundidade buscaEmProfundidade = new BuscaProfundidade((GrafoListaAdjacencia) arvoreGeradoraDeRotulosMinimos, verticeInicial);
         while (buscaEmProfundidade.inicializaGrafo() != false) {// enquanto nãoe stiver conectado
-            while (g.getArestas().hasNext()) {
-                int numeroDeRepeticoesDeUmLabel = quantoVerticesTem.get(g.getArestas().next().getL().getL());
-                quantoVerticesTem.replace(g.getArestas().next().getL().getL(), numeroDeRepeticoesDeUmLabel++);
+            Iterator<Aresta<Vertice, Vertice>> arestas = g.getArestas();
+            while (arestas.hasNext()) {
+                Aresta a = arestas.next();
+                int numeroDeRepeticoesDeUmLabel = quantoVerticesTem.get(a.getL().getL());
+                quantoVerticesTem.replace(a.getL().getL(), numeroDeRepeticoesDeUmLabel++);
             }
-
-            while (g.getArestas().hasNext()) {
-                if (numeroMaximo < quantoVerticesTem.get(g.getArestas().next().getL().getL())) {
-                    numeroMaximo = quantoVerticesTem.get(g.getArestas().next().getL().getL());
-                    label = g.getArestas().next().getL().getL();
+            arestas = g.getArestas();
+            while (arestas.hasNext()) {
+                 Aresta a = arestas.next();
+                if (numeroMaximo < quantoVerticesTem.get(a.getL().getL())) {
+                    numeroMaximo = quantoVerticesTem.get(a.getL().getL());
+                    label = a.getL().getL();
                 }
             }
 
-            transferirArestas(g, label, numeroMaximo, arvoreGeradoraDeRotulosMinimos);
+            transferirArestas(g, label, numeroMaximo,  arvoreGeradoraDeRotulosMinimos);
         }
         int numeroDeLabels = 0;
         ArrayList<Rotulo> a = new ArrayList<>();
-        while (g.getArestas().hasNext()) {
-            if (!a.contains(g.getArestas().next().getL())) {
-                a.add(g.getArestas().next().getL());
+        Iterator<Aresta<Vertice, Vertice>> arestas = g.getArestas();
+        while (arestas.hasNext()) {
+            Aresta aresta = arestas.next();
+            if (!a.contains(aresta.getL())) {
+                a.add(aresta.getL());
                 numeroDeLabels++;
             }
         }

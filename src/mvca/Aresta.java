@@ -32,6 +32,7 @@ public class Aresta<U extends Vertice, V extends Vertice> {
     public void setVertice2(V v2) {
         this.v2 = v2;
     }
+
     public Rotulo getL() {
         return l;
     }
@@ -39,4 +40,5 @@ public class Aresta<U extends Vertice, V extends Vertice> {
     public void setL(Rotulo l) {
         this.l = l;
     }
+
 }

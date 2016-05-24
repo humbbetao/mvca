@@ -20,7 +20,5 @@ public class Vertice {
 		this.id = id;
 	}
 
-    Object getCor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }

@@ -3,18 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Vertice.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/GrafoListaAdjacencia.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/MVCAAlgorithm.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/GrafoFactory.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Rotulo.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Aresta.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Grafo.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/BuscaProfundidade.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Representacao.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/MVCA.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/VerticeBuscaProfundidade.java</file>
-            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/MVCA/src/mvca/Factory.java</file>
+            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/mvca/src/mvca/MVCA.java</file>
+            <file>file:/C:/Users/humbe/Documents/NetBeansProjects/mvca/src/mvca/MVCAAlgorithm.java</file>
         </group>
     </open-files>
 </project-private>
