@@ -1,4 +1,4 @@
-package mvca;
+package MVCA;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -28,33 +28,31 @@ public class MVCA {
                 numeroDeLinhas = numeroDeVertices;
             } else {
                 numeroDeLinhas--;
+                g.rotulos = new ArrayList<>();
                 for (int j = 0; j < s.length; j++) {
-                    Vertice u = new Vertice(String.valueOf(numeroDeLinhas));
-                    Vertice v = new Vertice(String.valueOf(j));
+                    VerticeBuscaProfundidade u = new VerticeBuscaProfundidade(String.valueOf(numeroDeLinhas));
+                    VerticeBuscaProfundidade v = new VerticeBuscaProfundidade(String.valueOf(j));
+//                    System.out.println(numeroDeLinhas + "/" + j);
                     g.adicionaVertice(u);
                     g.adicionaVertice(v);
                     Rotulo l = new Rotulo(s[j]);
-                    if (g.rotulos.isEmpty()) {
-                        g.rotulos = new ArrayList<>();
-                        g.rotulos.add(l);
-                        g.numeroDeRotulos++;
-                    }
                     if (!g.rotulos.contains(l)) {
                         g.rotulos.add(l);
                         g.numeroDeRotulos++;
                     }
                     if (!s[j].equals(numeroDeLabels)) {
-                        g.adicionaAresta(new Aresta(u, v, l));
+                        Aresta nova = new Aresta(u, v, l);
+                        g.adicionaAresta(nova);
+                        
                     }
-
                 }
             }
+
             if (numeroDeLinhas == 0) {
                 k++;
                 numeroDeLinhas = numeroDeVertices;
                 MVCAAlgorithm m = new MVCAAlgorithm(g, numeroDeVertices);
-                System.out.println(m.contarNumeroDeLabels(numeroDeVertices) + "ESSE É O DO" + k);
-//                print()
+                System.out.println("Esse numero e o do grafo : " + m.contarNumeroDeLabels(numeroDeVertices, numeroDeLabels));
                 numeroDeLinhas = numeroDeVertices;
             }
             System.out.println(linha);

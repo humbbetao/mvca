@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mvca;
+package MVCA;
 
 /**
  *
@@ -11,7 +11,7 @@ package mvca;
  * @param <V>
  * @param <R>
  */
-public class VerticeRotulo<V extends Vertice, R extends Rotulo > {
+public class VerticeRotulo<V extends VerticeBuscaProfundidade, R extends Rotulo > {
     private V v;
     private R r;
 
@@ -23,7 +23,7 @@ public class VerticeRotulo<V extends Vertice, R extends Rotulo > {
         this.r = r;
     }
 
-    public Vertice getV() {
+    public VerticeBuscaProfundidade getV() {
         return v;
     }
 

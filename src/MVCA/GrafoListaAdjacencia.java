@@ -1,4 +1,4 @@
-package mvca;
+package MVCA;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +10,11 @@ import java.util.Set;
 
 public class GrafoListaAdjacencia {
 
-    HashMap<Vertice, ArrayList<VerticeRotulo>> grafo = new HashMap<>();
+    HashMap<VerticeBuscaProfundidade, ArrayList<VerticeRotulo>> grafo = new HashMap<>();
     int numeroDeRotulos = 0;
     ArrayList<Rotulo> rotulos = new ArrayList<Rotulo>();
 
-    GrafoListaAdjacencia(Iterator<Vertice> vertices) {
+    GrafoListaAdjacencia(Iterator<VerticeBuscaProfundidade> vertices) {
         while (vertices.hasNext()) {
             adicionaVertice(vertices.next());
         }
@@ -24,39 +24,39 @@ public class GrafoListaAdjacencia {
     GrafoListaAdjacencia() {
     }
 
-    public Iterator<Vertice> getVerticesAdjacentes(Vertice u) {
-        ArrayList<VerticeRotulo> vertices = new ArrayList<VerticeRotulo>();
-        vertices = grafo.get(u);
-        ArrayList<Vertice> v = new ArrayList<>();
-        for (VerticeRotulo vr : vertices) {
-            v.add(vr.getV());
-        }
-        return (Iterator<Vertice>) v;
-//
-//        if (u != null && grafo.containsKey(u)) {
-//            return grafo.get(u).iterator();
-//        } else {
-//            return null;
+    public Iterator<VerticeRotulo> getVerticesAdjacentes(VerticeBuscaProfundidade u) {
+//        ArrayList<VerticeRotulo> vertices = new ArrayList<VerticeRotulo>();
+//        vertices = grafo.get(u);
+//        ArrayList<Vertice> v = new ArrayList<>();
+//        for (VerticeRotulo vr : vertices) {
+//            v.add(vr.getV());
 //        }
+//        return (Iterator<VerticeBuscaProfundidade>) v;
+//
+        if (u != null && grafo.containsKey(u)) {
+            return grafo.get(u).iterator();
+        } else {
+            return null;
+        }
 
     }
 
-    public Iterator<Vertice> getVertices() {
+    public Iterator<VerticeBuscaProfundidade> getVertices() {
         return this.grafo.keySet().iterator();
     }
 
-    public Iterator<Aresta<Vertice, Vertice>> getArestas() {
-        Set<Aresta<Vertice, Vertice>> i = new HashSet<Aresta<Vertice, Vertice>>();
-        for (Entry<Vertice, ArrayList<VerticeRotulo>> adj : grafo.entrySet()) {
+    public Iterator<Aresta> getArestas() {
+        Set<Aresta> i = new HashSet<Aresta>();
+        for (Entry<VerticeBuscaProfundidade, ArrayList<VerticeRotulo>> adj : grafo.entrySet()) {
             for (VerticeRotulo u : adj.getValue()) {
-                i.add(new Aresta<>(adj.getKey(), u.getV()));
+                i.add(new Aresta(adj.getKey(), u.getV()));
             }
         }
         return i.iterator();
     }
 
-    public Vertice getVertice(String idVertice) {
-        for (Entry<Vertice, ArrayList<VerticeRotulo>> e : grafo.entrySet()) {
+    public VerticeBuscaProfundidade getVertice(String idVertice) {
+        for (Entry<VerticeBuscaProfundidade, ArrayList<VerticeRotulo>> e : grafo.entrySet()) {
             if (e.getKey().getId().equals(idVertice)) {
                 return e.getKey();
             } else {
@@ -71,10 +71,10 @@ public class GrafoListaAdjacencia {
         return null;
     }
 
-    public void adicionaVertice(Vertice verticeNoGrafo,
+    public void adicionaVertice(VerticeBuscaProfundidade verticeNoGrafo,
             VerticeRotulo verticeAdicionado) {
         // verifica se verticeNoGrafo esta no grafo
-        Vertice v = getVertice(verticeNoGrafo.getId());
+        VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) getVertice(verticeNoGrafo.getId());
         if (v == null) {
             throw new RuntimeException("O vértice com identificado "
                     + verticeNoGrafo.getId()
@@ -95,10 +95,10 @@ public class GrafoListaAdjacencia {
         }
     }
 
-    public void adicionaVertice(Vertice verticeAdicionado) {
+    public void adicionaVertice(VerticeBuscaProfundidade verticeAdicionado) {
         // o vértice já está no grafo ?
         // se não, adiciona o vértice sem pai
-        Vertice v = getVertice(verticeAdicionado.getId());
+        VerticeBuscaProfundidade v = getVertice(verticeAdicionado.getId());
         if (v == null) {
             this.grafo.put(verticeAdicionado, new ArrayList<>());
         }
@@ -106,7 +106,7 @@ public class GrafoListaAdjacencia {
         verticeAdicionado = v;
     }
 
-    public void adicionaAresta(Aresta<Vertice, Vertice> arestaAdicionada) {
+    public void adicionaAresta(Aresta arestaAdicionada) {
         if (arestaAdicionada.getVertice1() == null
                 || arestaAdicionada.getVertice2() == null) {
             throw new RuntimeException(
@@ -114,10 +114,10 @@ public class GrafoListaAdjacencia {
         } else {
             // vertice 1 da aresta já existe no grafo ?
             // se não, cria nova entrada na lista de adjacências
-            Vertice v = getVertice(arestaAdicionada.getVertice1().getId());
+            VerticeBuscaProfundidade v = getVertice(arestaAdicionada.getVertice1().getId());
             if (v == null) {
                 // recupera vertice 2
-                Vertice v2 = getVertice(arestaAdicionada.getVertice2().getId());
+                VerticeBuscaProfundidade v2 = getVertice(arestaAdicionada.getVertice2().getId());
                 // vertice 2 ja esta no grafo ?
                 if (v2 != null) {
                     v = arestaAdicionada.getVertice1();
@@ -140,7 +140,7 @@ public class GrafoListaAdjacencia {
                 // de adjacência
             } else {
                 // vértice 2 está no grafo?
-                Vertice v2 = getVertice(arestaAdicionada.getVertice2().getId());
+                VerticeBuscaProfundidade v2 = getVertice(arestaAdicionada.getVertice2().getId());
                 if (v2 == null) {
                     v2 = arestaAdicionada.getVertice2();
                     // adiciona vertice 2 ao grafo
@@ -149,7 +149,9 @@ public class GrafoListaAdjacencia {
 
                 // adiciona vertice 2 a lista de adjacencia do vertice 1
                 List<VerticeRotulo> l = this.grafo.get(v);
+                
                 l.add(new VerticeRotulo(v2, arestaAdicionada.getL()));
+//                System.out.println("ADD nova Aresta");
             }
         }
     }

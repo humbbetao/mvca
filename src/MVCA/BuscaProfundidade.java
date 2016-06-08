@@ -1,13 +1,14 @@
-package mvca;
+package MVCA;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.text.html.HTMLDocument;
 
 /**
  *
  * @author humbe
  */
-public class BuscaProfundidade implements Algoritmo {
+public class BuscaProfundidade {
 
     private GrafoListaAdjacencia g;
     private VerticeBuscaProfundidade s;
@@ -24,28 +25,37 @@ public class BuscaProfundidade implements Algoritmo {
 
     //TODO Exercicio 4.1 - Implementar o algoritmo de inicializacao da busca em profundidade
     public boolean inicializaGrafo() {
+        System.out.println("Inicialiazou a busca em Profundidade");
         int tempo;
         boolean recomecou = false;
         int r = 0;
         VerticeBuscaProfundidade u = new VerticeBuscaProfundidade();
-        Iterator<Aresta<Vertice, Vertice>> arestas = g.getArestas();
+        Iterator<Aresta> arestas = g.getArestas();
         while (arestas.hasNext()) {
-            Aresta a = arestas.next();
+            Aresta a = (Aresta) arestas.next();
             u = (VerticeBuscaProfundidade) a.getVertice1();
             u.setCor(new CorVertice(Cor.Branco));
             u.setPai(null);
 
         }
         tempo = 0;
-        Iterator<VerticeBuscaProfundidade> vertices = (Iterator<VerticeBuscaProfundidade>) g.getVertices();
+        Iterator<VerticeBuscaProfundidade> vertices = g.getVertices();
+        ArrayList<VerticeBuscaProfundidade> vertices2 = new ArrayList<>();
         while (vertices.hasNext()) {
-            VerticeBuscaProfundidade vertice = vertices.next();
-            if (recomecou == true && r > 0) {
+            Vertice v = vertices.next();
+            vertices2.add(new VerticeBuscaProfundidade(v.getId()));
+        }
+
+        Iterator<VerticeBuscaProfundidade> vertices3 = g.getVertices();
+        while (vertices3.hasNext()) {
+//        for (VerticeBuscaProfundidade f : vertices2) {
+            VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) vertices3.next();
+            if (recomecou == true) {
+                System.out.println("Recomecou");
                 return true;
-            }
-            if (vertice.getCor().getCor() == Cor.Branco) {
-                r = 1;
-                u = (VerticeBuscaProfundidade) vertice;
+            } else if (v.getCor().getCor() == Cor.Branco) {
+                recomecou = true;
+                u = v;
                 executar(u, tempo);
             }
 
@@ -55,30 +65,21 @@ public class BuscaProfundidade implements Algoritmo {
 
     //TODO Exercicio 4.2 - Implementar a busca em profundidade
     public void executar(VerticeBuscaProfundidade u, int tempo) {
+        System.out.println("Executando o Algoritmo de Profundidade");
         tempo++;
         u.setTempoDescoberta(tempo);
         u.setCor(new CorVertice(Cor.Cinza));
-        Iterator<Vertice> verticesAdj = g.getVerticesAdjacentes(u);
+        Iterator<VerticeRotulo> verticesAdj = g.getVerticesAdjacentes(u);
         while (verticesAdj.hasNext()) {
-            VerticeBuscaProfundidade v = (VerticeBuscaProfundidade) verticesAdj.next();
-            if (v.getCor().getCor() == Cor.Branco) {
-                v.setPai(u);
+            VerticeRotulo v = verticesAdj.next();
+            if (v.getV().getCor().getCor() == Cor.Branco) {
+                v.getV().setPai(u);
                 executar(u, tempo);
             }
         }
         u.setCor(new CorVertice(Cor.Preto));
         tempo++;
         u.setTempoFinalizacao(tempo);
-    }
-
-    //TODO Exercicio 4.3 - Implementar a impressao do grafo
-    public void imprimeGrafo(Grafo<VerticeBuscaProfundidade, Aresta<VerticeBuscaProfundidade, VerticeBuscaProfundidade>> g, VerticeBuscaProfundidade s, VerticeBuscaProfundidade v) {
-
-    }
-
-    @Override
-    public void executar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

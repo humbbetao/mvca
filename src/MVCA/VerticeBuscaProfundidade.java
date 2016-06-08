@@ -1,4 +1,4 @@
-package mvca;
+package MVCA;
 
 public class VerticeBuscaProfundidade extends Vertice {
 

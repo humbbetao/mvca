@@ -1,4 +1,4 @@
-package mvca;
+package MVCA;
 
 public enum Representacao {
 	LISTA_ADJACENCIA(0),

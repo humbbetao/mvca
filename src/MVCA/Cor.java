@@ -1,4 +1,4 @@
-package mvca;
+package MVCA;
 
 public enum Cor {	
 	Preto(0),
