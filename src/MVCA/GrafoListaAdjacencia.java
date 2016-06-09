@@ -49,7 +49,8 @@ public class GrafoListaAdjacencia {
         Set<Aresta> i = new HashSet<Aresta>();
         for (Entry<VerticeBuscaProfundidade, ArrayList<VerticeRotulo>> adj : grafo.entrySet()) {
             for (VerticeRotulo u : adj.getValue()) {
-                i.add(new Aresta(adj.getKey(), u.getV()));
+                i.add(new Aresta(adj.getKey(), u.getV(), u.getR()));
+//                System.out.println(u.getR().toString()+"Oi");
             }
         }
         return i.iterator();
@@ -144,13 +145,24 @@ public class GrafoListaAdjacencia {
                 if (v2 == null) {
                     v2 = arestaAdicionada.getVertice2();
                     // adiciona vertice 2 ao grafo
+//                    ArrayList<VerticeRotulo> a2 = new ArrayList<VerticeRotulo>();
+//                    a2.add
                     this.grafo.put(v2, new ArrayList<VerticeRotulo>());
+//                    this.
                 }
 
                 // adiciona vertice 2 a lista de adjacencia do vertice 1
-                List<VerticeRotulo> l = this.grafo.get(v);
-                
+                ArrayList<VerticeRotulo> l = this.grafo.get(v);
+                ArrayList<VerticeRotulo> l2 = this.grafo.get(v);
                 l.add(new VerticeRotulo(v2, arestaAdicionada.getL()));
+//                System.out.println();;
+//                this.grafo
+                
+//                System.out.println(l2.toString());;
+//                System.out.println(arestaAdicionada);
+//                
+//                this.grafo.remove(v);
+//                this.grafo.put(v, l);
 //                System.out.println("ADD nova Aresta");
             }
         }

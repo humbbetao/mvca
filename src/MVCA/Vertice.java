@@ -20,5 +20,10 @@ public class Vertice {
 		this.id = id;
 	}
 
+    @Override
+    public String toString() {
+        return "Vertice{" + "id=" + id + '}';
+    }
+
    
 }

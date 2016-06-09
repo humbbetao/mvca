@@ -32,7 +32,6 @@ public class MVCA {
                 for (int j = 0; j < s.length; j++) {
                     VerticeBuscaProfundidade u = new VerticeBuscaProfundidade(String.valueOf(numeroDeLinhas));
                     VerticeBuscaProfundidade v = new VerticeBuscaProfundidade(String.valueOf(j));
-//                    System.out.println(numeroDeLinhas + "/" + j);
                     g.adicionaVertice(u);
                     g.adicionaVertice(v);
                     Rotulo l = new Rotulo(s[j]);
@@ -40,10 +39,10 @@ public class MVCA {
                         g.rotulos.add(l);
                         g.numeroDeRotulos++;
                     }
-                    if (!s[j].equals(numeroDeLabels)) {
+                    if (!s[j].equals(String.valueOf(numeroDeLabels)) && !s[j].equals("")) {
                         Aresta nova = new Aresta(u, v, l);
                         g.adicionaAresta(nova);
-                        
+//                        System.out.println("OI" + g.getArestas().next());
                     }
                 }
             }
@@ -59,5 +58,4 @@ public class MVCA {
             i++;
         }
     }
-
 }

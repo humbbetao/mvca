@@ -50,4 +50,5 @@ public class VerticeBuscaProfundidade extends Vertice {
     public String toString() {
         return this.getId();
     }
+    
 }

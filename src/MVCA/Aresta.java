@@ -41,4 +41,9 @@ public class Aresta{
         this.l = l;
     }
 
+    @Override
+    public String toString() {
+        return "Aresta{" + "v1=" + v1 + ", v2=" + v2 + ", l=" + l + '}';
+    }
+
 }

@@ -38,5 +38,10 @@ public class VerticeRotulo<V extends VerticeBuscaProfundidade, R extends Rotulo 
     public void setR(R r) {
         this.r = r;
     }
+
+    @Override
+    public String toString() {
+        return "VerticeRotulo{" + "v=" + v + ", r=" + r + '}';
+    }
     
 }

@@ -32,6 +32,7 @@ public class MVCAAlgorithm {
         this.arvoreGeradoraDeRotulosMinimos = new GrafoListaAdjacencia(g.getVertices());
         this.verticeInicial = new VerticeBuscaProfundidade(g.getVertices().next().getId());
         this.g = g;
+        System.out.println(g.getArestas().next());
     }
 //        while this.arvoreGeradoraDeRotulosMinimos.notifyAll()
 
@@ -54,15 +55,15 @@ public class MVCAAlgorithm {
 //            System.out.println("Passsou");
             Aresta antiga = arestas.next();
             if (antiga.getL() != null) {
-                System.out.println(i);
+//                System.out.println(i);
                 if (antiga.getL().getL().equals(label)) {
                     Aresta arestaNova = new Aresta(this.arvoreGeradoraDeRotulosMinimos.getVertice(antiga.getVertice1().getId()), this.arvoreGeradoraDeRotulosMinimos.getVertice(antiga.getVertice1().getId()));
                     this.arvoreGeradoraDeRotulosMinimos.adicionaAresta(arestaNova);
-                    System.out.println("Eh Igual");
+//                    System.out.println("Eh Igual");
                 }
             }
         }
-        System.out.println(i);
+//        System.out.println(i);
 
     }
 
@@ -76,15 +77,23 @@ public class MVCAAlgorithm {
         }
         BuscaProfundidade buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
         while (buscaEmProfundidade.inicializaGrafo() == true) {// enquanto nãoe stiver conectado
-            System.out.println("Passou");
+//            System.out.println("Passou");
+            int j = 0;
             Iterator<Aresta> arestas = g.getArestas();
             while (arestas.hasNext()) {
+//                System.out.println(a);
                 Aresta a = arestas.next();
+                j++;
+//                System.out.println(j);
                 if (a.getL() != null) {
+//                    System.out.println(a.getL().toString());
+//                    int numeroDeRepeticoesDeUmLabel = quantosVerticesTem.get(1);
+//                    System.out.println(a.getL().getL() + "ROtulo de agora");
                     int numeroDeRepeticoesDeUmLabel = quantosVerticesTem.get(Integer.parseInt(a.getL().getL()));
-                    System.out.println(numeroDeRepeticoesDeUmLabel + "Oi");
+//                    System.out.println(numeroDeRepeticoesDeUmLabel + "Oi");
+//                    System.out.println(Integer.parseInt(a.getL().getL()) + "ROtulo de agora");
                     quantosVerticesTem.set(Integer.parseInt(a.getL().getL()), (numeroDeRepeticoesDeUmLabel++));
-                     System.out.println("COntando os rotulos");
+//                    System.out.println("Contando os rotulos");
 //                        .replace(a.getL().getL(), numeroDeRepeticoesDeUmLabel++);
                 }
             }
@@ -95,12 +104,14 @@ public class MVCAAlgorithm {
 ////                    numeroMaximo = quantoVerticesTem.get(a.getL().getL());
 //                label = a.getL().getL();
 ////                }
-            for (int j = 0; j < quantosVerticesTem.size(); j++) {
-                if (numeroMaximo < quantosVerticesTem.get(j)) {
-                    numeroMaximo = quantosVerticesTem.get(j);
-                }
-                label = String.valueOf(j);
+
+        }
+        System.out.println(quantosVerticesTem.toString());
+        for (int j = 0; j < numeroDeLabels; j++) {
+            if (numeroMaximo < quantosVerticesTem.get(j)) {
+                numeroMaximo = quantosVerticesTem.get(j);
             }
+            label = String.valueOf(j);
         }
         System.out.println(quantosVerticesTem.toString());
 

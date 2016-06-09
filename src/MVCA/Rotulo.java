@@ -25,4 +25,9 @@ class Rotulo {
         this.l = l;
     }
 
+    @Override
+    public String toString() {
+        return "Rotulo{" + "l=" + l + '}';
+    }
+
 }
