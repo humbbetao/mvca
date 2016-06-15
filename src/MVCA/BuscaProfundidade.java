@@ -65,7 +65,7 @@ public class BuscaProfundidade {
 
     //TODO Exercicio 4.2 - Implementar a busca em profundidade
     public void executar(VerticeBuscaProfundidade u, int tempo) {
-        System.out.println("Executando o Algoritmo de Profundidade");
+//        System.out.println("Executando o Algoritmo de Profundidade");
         tempo++;
         u.setTempoDescoberta(tempo);
         u.setCor(new CorVertice(Cor.Cinza));
@@ -74,7 +74,8 @@ public class BuscaProfundidade {
             VerticeRotulo v = verticesAdj.next();
             if (v.getV().getCor().getCor() == Cor.Branco) {
                 v.getV().setPai(u);
-                executar(u, tempo);
+                System.out.println(v.toString());
+                executar(v.getV(), tempo);
             }
         }
         u.setCor(new CorVertice(Cor.Preto));
