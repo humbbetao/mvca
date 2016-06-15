@@ -11,7 +11,7 @@ public class MVCA {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
         GrafoListaAdjacencia g = new GrafoListaAdjacencia();
-        FileReader arq = new FileReader("HDGraph50_12.txt");
+        FileReader arq = new FileReader("MDGraph500_625.txt");
         BufferedReader lerArq = new BufferedReader(arq);
         String linha;
         int i = 0;
@@ -40,18 +40,21 @@ public class MVCA {
                         g.numeroDeRotulos++;
                     }
                     if (!s[j].equals(String.valueOf(numeroDeLabels)) && !s[j].equals("")) {
-                        Aresta nova = new Aresta(u, v, l);
-                        g.adicionaAresta(nova);
+                        Aresta novaUV = new Aresta(u, v, l);
+                        g.adicionaAresta(novaUV);
+                        Aresta novaVU = new Aresta(v, u, l);
+                        g.adicionaAresta(novaVU);
 //                        System.out.println("OI" + g.getArestas().next());
                     }
                 }
+//                numeroDeLinhas=0;
             }
 
             if (numeroDeLinhas == 0) {
                 k++;
                 numeroDeLinhas = numeroDeVertices;
                 MVCAAlgorithm m = new MVCAAlgorithm(g, numeroDeVertices);
-                System.out.println("Esse numero e o do grafo : " + m.contarNumeroDeLabels(numeroDeVertices, numeroDeLabels));
+                System.out.println("Esse numero de labels Minimos Nesse Grafo : " + m.contarNumeroDeLabels(numeroDeVertices, numeroDeLabels));
                 numeroDeLinhas = numeroDeVertices;
             }
             System.out.println(linha);

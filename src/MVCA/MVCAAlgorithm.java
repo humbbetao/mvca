@@ -44,6 +44,7 @@ public class MVCAAlgorithm {
 //            if (antiga.getL() != null) {
 //                System.out.println(i);
             if (antiga.getL().getL().equals(label)) {
+                System.out.println(antiga.toString());
                 Aresta arestaNova = new Aresta(new VerticeBuscaProfundidade(antiga.getVertice1().getId()), new VerticeBuscaProfundidade(antiga.getVertice2().getId()), new Rotulo(antiga.getL().getL()));
                 this.arvoreGeradoraDeRotulosMinimos.adicionaAresta(arestaNova);
 //                System.out.println("Eh Igual");
