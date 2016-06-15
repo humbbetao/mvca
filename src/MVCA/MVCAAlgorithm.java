@@ -23,7 +23,7 @@ public class MVCAAlgorithm {
     VerticeBuscaProfundidade verticeInicial;
     HashMap<String, Integer> quantoVerticesTem = new HashMap<>();
     ArrayList<Integer> quantosVerticesTem = new ArrayList<>();
-    ArrayList<String> labelsAceitos = new ArrayList<>();
+    ArrayList<String> labelsAceitos = new ArrayList<String>();
     int numeroDeVertices;
     GrafoListaAdjacencia g;
 
@@ -77,7 +77,8 @@ public class MVCAAlgorithm {
                 Aresta a = arestas.next();
 
                 j++;
-                if (!labelsAceitos.contains(a.getL().getL())) {
+                String nova = a.getL().getL();
+                if (a.getL() != null && !(labelsAceitos.contains(nova))) {
                     int numeroDeRepeticoesDeUmLabel = quantosVerticesTem.get(Integer.parseInt(a.getL().getL()));
                     numeroDeRepeticoesDeUmLabel++;
                     quantosVerticesTem.set(Integer.parseInt(a.getL().getL()), numeroDeRepeticoesDeUmLabel);
@@ -96,7 +97,7 @@ public class MVCAAlgorithm {
             }
 //            System.out.println("Esse eh o label dessa iteracao " + label);
             transferirArestas(label, numeroMaximo, arvoreGeradoraDeRotulosMinimos);
-//            buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
+            buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
             labelsAceitos.add(label);
             System.out.println("labelAceitos" + labelsAceitos.toString());
         }
