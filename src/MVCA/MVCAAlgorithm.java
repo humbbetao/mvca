@@ -23,7 +23,7 @@ public class MVCAAlgorithm {
     VerticeBuscaProfundidade verticeInicial;
     HashMap<String, Integer> quantoVerticesTem = new HashMap<>();
     ArrayList<Integer> quantosVerticesTem = new ArrayList<>();
-
+    ArrayList<String> labelsAceitos = new ArrayList<>();
     int numeroDeVertices;
     GrafoListaAdjacencia g;
 
@@ -70,17 +70,23 @@ public class MVCAAlgorithm {
                 quantosVerticesTem.add(0);
             }
             Iterator<Aresta> arestas = g.getArestas();
+//            Iterator<Aresta> arestaDoGrafoNovo = arvoreGeradoraDeRotulosMinimos.getArestas();
             while (arestas.hasNext()) {
+//                while (arestaDoGrafoNovo.hasNext()) {
+//                    Aresta arestaNova = arestaDoGrafoNovo.next();
                 Aresta a = arestas.next();
+
                 j++;
-                if (a.getL() != null) {
+                if (!labelsAceitos.contains(a.getL().getL())) {
                     int numeroDeRepeticoesDeUmLabel = quantosVerticesTem.get(Integer.parseInt(a.getL().getL()));
                     numeroDeRepeticoesDeUmLabel++;
                     quantosVerticesTem.set(Integer.parseInt(a.getL().getL()), numeroDeRepeticoesDeUmLabel);
                 }
+
             }
             numeroMaximo = 0;
             arestas = g.getArestas();
+            System.out.println(Arrays.toString(quantosVerticesTem.toArray()));
             while (arestas.hasNext()) {
                 Aresta a = arestas.next();
                 if (numeroMaximo < quantosVerticesTem.get(Integer.parseInt(a.getL().getL()))) {
@@ -88,24 +94,26 @@ public class MVCAAlgorithm {
                     label = a.getL().getL();
                 }
             }
-            System.out.println("Esse eh o label dessa iteracao " + label);
+//            System.out.println("Esse eh o label dessa iteracao " + label);
             transferirArestas(label, numeroMaximo, arvoreGeradoraDeRotulosMinimos);
 //            buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
+            labelsAceitos.add(label);
+            System.out.println("labelAceitos" + labelsAceitos.toString());
         }
         ArrayList<Integer> novo = quantosVerticesTem;
+
         System.out.println(Arrays.toString(quantosVerticesTem.toArray()));
         numeroMaximo = max(quantosVerticesTem);
-        System.out.println("O Numero maximo de labels nessa eh o " + numeroMaximo);
+
+        System.out.println(
+                "O Numero maximo de labels nessa eh o " + numeroMaximo);
 
         int numeroDeLabel = 0;
         Iterator<Aresta> arestasNoGrafoOriginal = g.getArestas();
         Iterator<Aresta> arestasNoGrafoNovo = arvoreGeradoraDeRotulosMinimos.getArestas();
         ArrayList<String> novo2 = new ArrayList<>();
 
-//        preciso comecar a verificar quanrtas arestas diferentes tem nesse negocio
         while (arestasNoGrafoNovo.hasNext()) {
-//            System.out.println("Novo");
-//            System.out.println("COntando");
             Aresta aresta = arestasNoGrafoNovo.next();
             System.out.println(aresta);
             if (aresta.getL() != null) {
