@@ -31,7 +31,6 @@ public class MVCAAlgorithm {
         this.arvoreGeradoraDeRotulosMinimos = new GrafoListaAdjacencia(g.getVertices());
         this.verticeInicial = new VerticeBuscaProfundidade(g.getVertices().next().getId());
         this.g = g;
-//        System.out.println(g.getArestas().next());
     }
 
     private void transferirArestas(String label, int numeroMaximo, GrafoListaAdjacencia arvoreGeradoraDeRotulosMinimos) {
@@ -39,24 +38,15 @@ public class MVCAAlgorithm {
         int i = 0;
         while (arestas.hasNext()) {
             i++;
-//            System.out.println("Passsou");
             Aresta antiga = arestas.next();
-//            if (antiga.getL() != null) {
-//                System.out.println(i);
             if (antiga.getL().getL().equals(label)) {
-                System.out.println(antiga.toString());
                 Aresta arestaNova = new Aresta(new VerticeBuscaProfundidade(antiga.getVertice1().getId()), new VerticeBuscaProfundidade(antiga.getVertice2().getId()), new Rotulo(antiga.getL().getL()));
                 this.arvoreGeradoraDeRotulosMinimos.adicionaAresta(arestaNova);
-//                System.out.println("Eh Igual");
-//                }
             }
         }
-//        System.out.println(i);
-
     }
 
     public int contarNumeroDeLabels(int numeroDeVertices, int numeroDeLabels) {
-        System.out.println("Comecou a Executar o Algoritmo");
         for (int i = 0; i < numeroDeLabels; i++) {
             quantosVerticesTem.add(0);
         }
@@ -71,12 +61,8 @@ public class MVCAAlgorithm {
                 quantosVerticesTem.add(0);
             }
             Iterator<Aresta> arestas = g.getArestas();
-//            Iterator<Aresta> arestaDoGrafoNovo = arvoreGeradoraDeRotulosMinimos.getArestas();
             while (arestas.hasNext()) {
-//                while (arestaDoGrafoNovo.hasNext()) {
-//                    Aresta arestaNova = arestaDoGrafoNovo.next();
                 Aresta a = arestas.next();
-
                 j++;
                 String nova = a.getL().getL();
                 if (a.getL() != null && !(labelsAceitos.contains(nova))) {
@@ -84,11 +70,9 @@ public class MVCAAlgorithm {
                     numeroDeRepeticoesDeUmLabel++;
                     quantosVerticesTem.set(Integer.parseInt(a.getL().getL()), numeroDeRepeticoesDeUmLabel);
                 }
-
             }
             numeroMaximo = 0;
             arestas = g.getArestas();
-            System.out.println(Arrays.toString(quantosVerticesTem.toArray()));
             while (arestas.hasNext()) {
                 Aresta a = arestas.next();
                 if (numeroMaximo < quantosVerticesTem.get(Integer.parseInt(a.getL().getL()))) {
@@ -96,19 +80,12 @@ public class MVCAAlgorithm {
                     label = a.getL().getL();
                 }
             }
-//            System.out.println("Esse eh o label dessa iteracao " + label);
             transferirArestas(label, numeroMaximo, arvoreGeradoraDeRotulosMinimos);
             buscaEmProfundidade = new BuscaProfundidade(arvoreGeradoraDeRotulosMinimos, verticeInicial);
             labelsAceitos.add(label);
-            System.out.println("labelAceitos" + labelsAceitos.toString());
         }
         ArrayList<Integer> novo = quantosVerticesTem;
-
-        System.out.println(Arrays.toString(quantosVerticesTem.toArray()));
         numeroMaximo = max(quantosVerticesTem);
-
-        System.out.println(
-                "O Numero maximo de labels nessa eh o " + numeroMaximo);
 
         int numeroDeLabel = 0;
         Iterator<Aresta> arestasNoGrafoOriginal = g.getArestas();
@@ -117,13 +94,11 @@ public class MVCAAlgorithm {
 
         while (arestasNoGrafoNovo.hasNext()) {
             Aresta aresta = arestasNoGrafoNovo.next();
-            System.out.println(aresta);
             if (aresta.getL() != null) {
 
                 if (!novo2.contains(aresta.getL().getL())) {
                     novo2.add(aresta.getL().getL());
                     numeroDeLabel++;
-                    System.out.println("eh igual ao do grafo");
                 }
             }
         }

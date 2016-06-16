@@ -155,15 +155,7 @@ public class GrafoListaAdjacencia {
                 ArrayList<VerticeRotulo> l = this.grafo.get(v);
                 ArrayList<VerticeRotulo> l2 = this.grafo.get(v);
                 l.add(new VerticeRotulo(v2, arestaAdicionada.getL()));
-//                System.out.println();;
-//                this.grafo
-                
-//                System.out.println(l2.toString());;
-//                System.out.println(arestaAdicionada);
-//                
-//                this.grafo.remove(v);
-//                this.grafo.put(v, l);
-//                System.out.println("ADD nova Aresta");
+
             }
         }
     }

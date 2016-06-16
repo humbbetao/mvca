@@ -28,9 +28,7 @@ public class BuscaProfundidade {
 
     //TODO Exercicio 4.1 - Implementar o algoritmo de inicializacao da busca em profundidade
     public boolean inicializaGrafo() {
-        System.out.println("Inicialiazou a busca em Profundidade");
         int tempo;
-//        boolean recomecou = false;
         int r = 0;
         VerticeBuscaProfundidade u = new VerticeBuscaProfundidade();
         Iterator<Aresta> arestas = g.getArestas();
@@ -56,14 +54,8 @@ public class BuscaProfundidade {
             verticesJaPassados.add(v.getId());
             if (v.getCor().getCor() == Cor.Branco) {
                 if (recomecou == true) {
-//                    System.out.println("Recomecou");
                     return true;
                 }
-
-//                if (verticesJaPassados.contains(v.getId()) && recomecou == true) {
-//                    return true;
-//                }
-//                System.out.println(v.toString() + "recomecou2");
                 recomecou = true;
                 u = v;
                 executar(u, tempo);
@@ -75,28 +67,15 @@ public class BuscaProfundidade {
 
     //TODO Exercicio 4.2 - Implementar a busca em profundidade
     public void executar(VerticeBuscaProfundidade u, int tempo) {
-//        System.out.println("Executando o Algoritmo de Profundidade");
-//        if (verticesJaPassados.size() == 50) {
-//            System.out.println("Vertices+" + verticesJaPassados.toString());
-//            recomecou = false;
-//        }
         tempo++;
         u.setTempoDescoberta(tempo);
         u.setCor(new CorVertice(Cor.Cinza));
         Iterator<VerticeRotulo> verticesAdj = g.getVerticesAdjacentes(u);
-//        System.out.println(verticesAdj..toString());
-
         while (verticesAdj.hasNext()) {
 
             VerticeRotulo v = verticesAdj.next();
-//            if (!verticesJaPassados.contains(v.getV().getId())) {
-//                verticesJaPassados.add(v.getV().getId());
-//            }
-
-//            System.out.println("Vertice" + u.toString() + "||" + v.toString());
             if (v.getV().getCor().getCor() == Cor.Branco) {
                 v.getV().setPai(u);
-                System.out.println(v.toString());
                 executar(v.getV(), tempo);
             }
         }
